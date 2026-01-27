@@ -64,19 +64,16 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
-    - name: Update feeds
+    - name: Update feeds & Install feeds
       run: |
         cd openwrt
-        ./scripts/feeds update 
-
-    - name: Install feeds
-      run: |
-        cd openwrt
+        ./scripts/feeds update  -a
         ./scripts/feeds install -a
 
-    - name: Applying the patch
-      run: |
-        cd openwrt
+        #--------------------------------------begin_patches------------------------------------------
+        echo "Start applying the patch"
+
+        
         rm -rf temp_resp
         git clone -b master --single-branch https://github.com/openwrt/packages.git temp_resp
         echo "update golang version"
@@ -94,6 +91,17 @@ jobs:
         echo "fixed rust host build error"
         sed -i 's/--set=llvm\.download-ci-llvm=false/--set=llvm.download-ci-llvm=true/' feeds/packages/lang/rust/Makefile
         grep -q -- '--ci false \\' feeds/packages/lang/rust/Makefile || sed -i '/x\.py \\/a \        --ci false \\' feeds/packages/lang/rust/Makefile
+
+
+        echo "Patch application completed"
+        #--------------------------------------end_patches--------------------------------------------
+
+        echo "CONFIG_ALL_NONSHARED=n" > .config
+        echo "CONFIG_ALL_KMODS=n" >> .config
+        echo "CONFIG_ALL=n" >> .config
+        echo "CONFIG_AUTOREMOVE=n" >> .config
+        echo "CONFIG_SIGNED_PACKAGES=n" >> .config
+        make defconfig
         
     - name: Load custom configuration
       run: |
