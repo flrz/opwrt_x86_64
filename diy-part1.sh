@@ -12,8 +12,8 @@
 
 # Uncomment a feed source
 #sed -i "/helloworld/d" "feeds.conf.default"
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
+#rm -rf feeds/packages/lang/golang
+#git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
 
 # Add a feed source
 sed -i '1i src-git flrz https://github.com/flrz/openwrt-packages' feeds.conf.default
