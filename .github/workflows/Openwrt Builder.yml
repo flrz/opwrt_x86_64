@@ -72,7 +72,7 @@ jobs:
         cd openwrt
         ./scripts/feeds install -a
 
- #--------------------------------------begin_patches------------------------------------------
+        #--------------------------------------begin_patches------------------------------------------
         echo "Start applying the patch"
 
 
