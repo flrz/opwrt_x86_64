@@ -76,7 +76,7 @@ jobs:
       run: |
         cd openwrt
         ./scripts/feeds update -a
-        ./scripts/feeds install libpcre libopenssl libpolarssl zlib libev libsodium
+        
         #替换golang
         #rm -rf feeds/packages/lang/golang
         #git clone https://github.com/immortalwrt/packages.git /tmp/immortalwrt_pkg
