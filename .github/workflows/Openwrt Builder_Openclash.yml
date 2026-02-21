@@ -6,8 +6,8 @@ name: Openwrt Builder_Openclash
 on:
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 0 08 * * 6
+  #schedule:
+    #- cron: 0 08 * * 6
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
